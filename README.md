@@ -4,7 +4,7 @@ Chiron is a file-based question-answering system that allows users to upload var
 
 ---
 
-## 🧠 Features
+## Features
 
 - Upload and parse documents on the backend
 - Ask natural language questions related to uploaded content
@@ -13,7 +13,7 @@ Chiron is a file-based question-answering system that allows users to upload var
 
 ---
 
-## 🛠️ Local Setup
+## 🛠 Local Setup
 
 ### 1. Clone the Repository
 
@@ -80,13 +80,13 @@ fetch('http://127.0.0.1:5000/upload')
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 <img width="960" alt="image" src="https://ik.imagekit.io/Eattendancehostel23/Screenshot%202025-04-09%20170958.png?updatedAt=1744199300129">
 
 ---
 
-## 📌 Notes
+## Notes
 
 - Max file size: 50 MB
 - Supported formats: `.pdf`, `.docx`, `.xlsx`, `.txt`, `.json`
@@ -94,6 +94,6 @@ fetch('http://127.0.0.1:5000/upload')
 
 ---
 
-## 📄 License
+## License
 
-MIT License – free to use with attribution.
+[MIT LICENSE](LICENSE) – free to use with attribution.
