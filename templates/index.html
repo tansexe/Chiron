@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chiron</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
 
 <body>
@@ -15,29 +15,33 @@
         <!-- File Upload Section -->
         <div class="upload-section">
             <h2>Upload File</h2>
-            <p>Supported file types: PDF, Word (.docx), Excel (.xlsx), Text (.txt), json(.json)</p>
-            <input type="file" id="fileInput" accept=".pdf,.docx,.xlsx,.txt, .json">
-            <button onclick="uploadFile()">Upload</button>
+            <p>Supported file types: PDF, Word (.docx), Excel (.xlsx), Text (.txt), JSON (.json)</p>
+            <label for="fileInput">Choose a file:</label>
+            <input type="file" id="fileInput" accept=".pdf,.docx,.xlsx,.txt,.json" />
+            <button id="uploadBtn" onclick="uploadFile()">Upload</button>
             <p id="uploadStatus"></p>
         </div>
 
         <!-- Query Section -->
         <div class="query-section">
             <h2>Ask a Question</h2>
-            <input type="text" id="queryInput" placeholder="Enter your question...">
-            <button onclick="submitQuery()">Ask</button>
+            <label for="queryInput" class="visually-hidden">Question</label>
+            <input type="text" id="queryInput" placeholder="Enter your question..." autocomplete="off" />
+            <button id="queryBtn" onclick="submitQuery()">Ask</button>
         </div>
 
         <!-- Response Section -->
         <div id="responseSection" class="hidden">
             <h2>Response:</h2>
-            <p id="responseContent"></p>
+            <pre id="responseContent"></pre>
         </div>
     </div>
 
     <script>
         async function uploadFile() {
             const fileInput = document.getElementById('fileInput');
+            const uploadBtn = document.getElementById('uploadBtn');
+            const uploadStatus = document.getElementById('uploadStatus');
             const file = fileInput.files[0];
 
             if (!file) {
@@ -50,12 +54,12 @@
                 return;
             }
 
-            const formData = new FormData();
-            formData.append('file', file);
-
-            const uploadStatus = document.getElementById('uploadStatus');
+            uploadBtn.disabled = true;
             uploadStatus.textContent = "Uploading and processing...";
             uploadStatus.style.color = "blue";
+
+            const formData = new FormData();
+            formData.append('file', file);
 
             try {
                 const response = await fetch('/upload', {
@@ -73,6 +77,8 @@
             } catch (error) {
                 uploadStatus.textContent = error.message;
                 uploadStatus.style.color = "red";
+            } finally {
+                uploadBtn.disabled = false;
             }
         }
 
@@ -80,14 +86,17 @@
             const queryInput = document.getElementById('queryInput');
             const responseContent = document.getElementById('responseContent');
             const responseSection = document.getElementById('responseSection');
+            const queryBtn = document.getElementById('queryBtn');
 
             if (!queryInput.value.trim()) {
                 alert("Please enter a question.");
                 return;
             }
 
+            queryBtn.disabled = true;
             responseSection.classList.remove('hidden');
             responseContent.textContent = "Processing query...";
+            responseContent.style.color = "inherit";
 
             try {
                 const response = await fetch('/query', {
@@ -105,6 +114,8 @@
             } catch (error) {
                 responseContent.textContent = error.message;
                 responseContent.style.color = "red";
+            } finally {
+                queryBtn.disabled = false;
             }
         }
     </script>
