@@ -82,7 +82,7 @@ fetch('http://127.0.0.1:5000/upload')
 
 ## 📸 Screenshots
 
-> (Insert screenshots or gifs showing UI, file upload, and querying in action)
+<img width="960" alt="image" src="https://ik.imagekit.io/Eattendancehostel23/Screenshot%202025-04-09%20170958.png?updatedAt=1744199300129">
 
 ---
 
